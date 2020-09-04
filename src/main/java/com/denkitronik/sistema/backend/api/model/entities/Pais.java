@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * @author aleja
+ * @author alejandro
  * @version 1.0
  * @created 28-ago.-2020 04:41:20 p. m.
  */

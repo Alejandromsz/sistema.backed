@@ -31,7 +31,7 @@ public class PaiseServiceImpl implements IPaisServices {
 	 */
 	@Override
 	public void delete(Integer id){
-
+              PaisDao.deleteById(id);
 	}
         
         @Transactional(readOnly = true)
@@ -46,7 +46,7 @@ public class PaiseServiceImpl implements IPaisServices {
 	 */
 	@Override
 	public Pais findById(Integer id){
-		return null;
+		return PaisDao.findById(id).orElse(null);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class PaiseServiceImpl implements IPaisServices {
 	 */
 	@Override
 	public Pais save(Pais pais){
-		return null;
+		return PaisDao.save(pais);
 	}
 
 	/**
@@ -65,17 +65,13 @@ public class PaiseServiceImpl implements IPaisServices {
 	 */
 	@Override
 	public Pais update(Pais pais, Integer id){
-		return null;
+		if(PaisDao.findById(id).isPresent()){
+                    Pais paisModificado = PaisDao.findById(id).get();
+                    paisModificado.setId(id);
+                    paisModificado.setPais(pais.getPais());
+                    PaisDao.save(paisModificado);
+                    return paisModificado;
+                }else return null;
 	}
-          /*
-    @Override
-    public Pais save(Pais pais) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public Pais update(Pais pais, Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/
 }//end PaiseServiceImpl
